@@ -1,0 +1,8 @@
+{
+  "runtimeOptions": {
+    "additionalProbingPaths": [
+      "C:\\Users\\Furball\\.dotnet\\store\\|arch|\\|tfm|",
+      "C:\\Users\\Furball\\.nuget\\packages"
+    ]
+  }
+}

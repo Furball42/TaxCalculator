@@ -1,0 +1,15 @@
+C:\Users\Furball\source\repos\TaxCalculator\TaxCalculator.Repo\bin\Debug\netcoreapp3.1\TaxCalculator.Repo.deps.json
+C:\Users\Furball\source\repos\TaxCalculator\TaxCalculator.Repo\bin\Debug\netcoreapp3.1\TaxCalculator.Repo.dll
+C:\Users\Furball\source\repos\TaxCalculator\TaxCalculator.Repo\bin\Debug\netcoreapp3.1\TaxCalculator.Repo.pdb
+C:\Users\Furball\source\repos\TaxCalculator\TaxCalculator.Repo\obj\Debug\netcoreapp3.1\TaxCalculator.Repo.csproj.AssemblyReference.cache
+C:\Users\Furball\source\repos\TaxCalculator\TaxCalculator.Repo\obj\Debug\netcoreapp3.1\TaxCalculator.Repo.AssemblyInfoInputs.cache
+C:\Users\Furball\source\repos\TaxCalculator\TaxCalculator.Repo\obj\Debug\netcoreapp3.1\TaxCalculator.Repo.AssemblyInfo.cs
+C:\Users\Furball\source\repos\TaxCalculator\TaxCalculator.Repo\obj\Debug\netcoreapp3.1\TaxCalculator.Repo.csproj.CoreCompileInputs.cache
+C:\Users\Furball\source\repos\TaxCalculator\TaxCalculator.Repo\obj\Debug\netcoreapp3.1\TaxCalculator.Repo.dll
+C:\Users\Furball\source\repos\TaxCalculator\TaxCalculator.Repo\obj\Debug\netcoreapp3.1\TaxCalculator.Repo.pdb
+C:\Users\Furball\source\repos\TaxCalculator\TaxCalculator.Repo\bin\Debug\netcoreapp3.1\TaxCalculator.Core.dll
+C:\Users\Furball\source\repos\TaxCalculator\TaxCalculator.Repo\bin\Debug\netcoreapp3.1\TaxCalculator.Core.pdb
+C:\Users\Furball\source\repos\TaxCalculator\TaxCalculator.Repo\obj\Debug\netcoreapp3.1\TaxCalculator.Repo.csproj.CopyComplete
+C:\Users\Furball\source\repos\TaxCalculator\TaxCalculator.Repo\bin\Debug\netcoreapp3.1\TaxCalculator.Repo.runtimeconfig.json
+C:\Users\Furball\source\repos\TaxCalculator\TaxCalculator.Repo\bin\Debug\netcoreapp3.1\TaxCalculator.Repo.runtimeconfig.dev.json
+C:\Users\Furball\source\repos\TaxCalculator\TaxCalculator.Repo\obj\Debug\netcoreapp3.1\TaxCalculator.Repo.genruntimeconfig.cache
