@@ -20,10 +20,16 @@ namespace TaxCalculator.Core.Models.CalculationTypes
 
         public override decimal CalculateResult(decimal annualIncome)
         {
-            if (annualIncome > ValueThreshold)
-                return Value;
+            if (annualIncome > 0)
+            {
+                if (annualIncome > ValueThreshold)
+                    return Value;
+                else
+                    return annualIncome / 100 * Percentage;
+            }
             else
-                return annualIncome / 100 * Percentage;
+                throw new ArgumentException("No negative income value allowed.");
+
         }
     }
 }

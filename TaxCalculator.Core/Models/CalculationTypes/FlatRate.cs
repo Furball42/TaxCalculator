@@ -14,7 +14,10 @@ namespace TaxCalculator.Core.Models.CalculationTypes
 
         public override decimal CalculateResult(decimal annualIncome)
         {
-            return annualIncome / 100 * Rate;
+            if(annualIncome > 0)
+                return annualIncome / 100 * Rate;
+            else
+                throw new ArgumentException("No negative income value allowed.");
         }
     }
 }
