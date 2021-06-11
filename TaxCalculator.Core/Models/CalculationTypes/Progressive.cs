@@ -10,7 +10,7 @@ namespace TaxCalculator.Core.Models.CalculationTypes
         [Required]
         public string ExtendedData { get; set; }
 
-        public override  decimal CalculateResult()
+        public override  decimal CalculateResult(decimal annualIncome)
         {
             throw new NotImplementedException();
         }

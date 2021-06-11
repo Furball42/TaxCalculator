@@ -148,3 +148,5 @@ C:\Users\Furball\source\repos\TaxCalculator\TaxCalculator.Test\bin\Debug\netcore
 C:\Users\Furball\source\repos\TaxCalculator\TaxCalculator.Test\bin\Debug\netcoreapp3.1\TaxCalculator.API.pdb
 C:\Users\Furball\source\repos\TaxCalculator\TaxCalculator.Test\bin\Debug\netcoreapp3.1\TaxCalculator.Core.pdb
 C:\Users\Furball\source\repos\TaxCalculator\TaxCalculator.Test\bin\Debug\netcoreapp3.1\TaxCalculator.Repo.pdb
+C:\Users\Furball\source\repos\TaxCalculator\TaxCalculator.Test\bin\Debug\netcoreapp3.1\Castle.Core.dll
+C:\Users\Furball\source\repos\TaxCalculator\TaxCalculator.Test\bin\Debug\netcoreapp3.1\Moq.dll

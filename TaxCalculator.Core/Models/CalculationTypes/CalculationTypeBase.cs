@@ -13,6 +13,6 @@ namespace TaxCalculator.Core.Models.CalculationTypes
         [Required, MaxLength(100)]
         public string Description { get; set; }
 
-        public abstract decimal CalculateResult();
+        public abstract decimal CalculateResult(decimal annualIncome);
     }
 }

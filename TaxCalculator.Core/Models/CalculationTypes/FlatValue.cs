@@ -18,9 +18,12 @@ namespace TaxCalculator.Core.Models.CalculationTypes
         [Column(TypeName = "decimal(4,2)")]
         public decimal Percentage { get; set; }
 
-        public override decimal CalculateResult()
+        public override decimal CalculateResult(decimal annualIncome)
         {
-            throw new NotImplementedException();
+            if (annualIncome > ValueThreshold)
+                return Value;
+            else
+                return annualIncome / 100 * Percentage;
         }
     }
 }
