@@ -15,6 +15,8 @@ namespace TaxCalculator.API
 {
     public class Startup
     {
+        readonly string MyAllowSpecificOrigins = "_myAllowSpecificOrigins";
+
         public Startup(IConfiguration configuration)
         {
             Configuration = configuration;
@@ -25,6 +27,8 @@ namespace TaxCalculator.API
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddCors();
+
             services.AddControllers();
             services.AddRepository();
         }
@@ -40,6 +44,11 @@ namespace TaxCalculator.API
             app.UseRouting();
 
             app.UseAuthorization();
+            
+            app.UseCors(
+                options => options.WithOrigins("http://localhost:60222").AllowAnyMethod()
+            );
+
 
             app.UseEndpoints(endpoints =>
             {

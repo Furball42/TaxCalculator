@@ -1,0 +1,159 @@
+﻿@{
+    ViewData["Title"] = "Calculator";
+}
+
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-md-2">
+        </div>
+        <div class="col-md-8">
+            <div class="card">
+                <h5 class="card-header">
+                    Tax Calculator
+                </h5>
+                <div class="card-body">
+                    <form id="calcForm">
+                        <div class="form-group">
+                            <label for="txtPostalCode">
+                                Postal Code
+                            </label>
+                            <input id="txtPostalCode" type="text" class="form-control" placeholder="Postal Code" value="A100" />
+                        </div>
+                        <div class="form-group">
+                            <label for="txtIncome">
+                                Annual Income
+                            </label>
+                            <input id="txtIncome" type="number" class="form-control" placeholder="Income" value="150000" />
+                        </div>
+                        <div class="form-group">
+                            <button id="btnSubmit" type="button" class="btn btn-primary">
+                                Calculate
+                            </button>
+                            <button id="btnReset" type="button" class="btn btn-success">
+                                Reset
+                            </button>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-12" id="warning">
+                                <div class="alert alert-warning">
+                                    Please complete all fields.
+                                </div>
+                            </div>
+                        </div>                        
+                    </form>                    
+                </div>
+                <div class="card-footer">
+                    <div id="results">
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label for="totalTaxValue">
+                                        Total Tax
+                                    </label>
+                                    <h3 id="totalTaxValue"></h3>
+                                </div>                                
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label for="totalTaxValue">
+                                        Total Tax Percentage
+                                    </label>
+                                    <h3 id="totalTaxPercentage"></h3>
+                                </div>                                
+                            </div>
+                        </div>                        
+                        <hr/>
+                        <div class="row">
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <label for="incomeBefore">
+                                        Income Before Tax
+                                    </label>
+                                    <h4 id="incomeBefore"></h4>
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <label for="incomeAfter">
+                                        Income After Tax
+                                    </label>
+                                    <h4 id="incomeAfter"></h4>
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <label for="monthlyTaxes">
+                                        Monthly Tax
+                                    </label>
+                                    <h4 id="monthlyTaxes"></h4>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-2">
+        </div>
+    </div>
+</div>
+
+@section scripts {
+
+    <script type="text/javascript">
+
+        $(document).ready(function(){
+
+            $('#warning').hide();
+            $('#results').hide();
+
+        });
+
+        $('#btnReset').on('click', function () {
+
+            $('#totalTaxValue').text("");
+            $('#totalTaxPercentage').text("");
+            $('#incomeBefore').text("");
+            $('#incomeAfter').text("");
+            $('#monthlyTaxes').text("");
+            $('#txtIncome').val('');
+            $('#txtPostalCode').val('');
+
+            $('#warning').hide();
+            $('#results').hide();
+        });
+
+
+        $('#btnSubmit').on('click', function () {
+
+            var income = $('#txtIncome').val();
+            var postalCode = $('#txtPostalCode').val();
+
+            if (income == '' || postalCode == '')
+                $('#warning').show();
+            else {
+
+                $('#results').show();
+
+                $.ajax({
+                    url: "http://localhost:5000/Calculation/DoTaxCalculation/" + income + "/" + postalCode,
+                    type: "Get",
+                    async: true,
+                    success: function (data) {
+
+                        $('#totalTaxValue').text(data.totalTaxes.toFixed(2));
+                        $('#totalTaxPercentage').text(data.totalTaxPercentage.toFixed(2) + "%");
+                        $('#incomeBefore').text(data.originalIncome.toFixed(2));
+                        $('#incomeAfter').text(data.incomeAfterTax.toFixed(2));
+                        $('#monthlyTaxes').text(data.totalMonthlyTaxes.toFixed(2));
+                    },
+                    error: function (request, message, error) {
+                        alert(message);
+                    }
+                });
+            }            
+        });
+
+    </script>
+
+}

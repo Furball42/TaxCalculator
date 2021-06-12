@@ -35,3 +35,4 @@ C:\Users\Furball\source\repos\TaxCalculator\TaxCalculator\obj\Debug\netcoreapp3.
 C:\Users\Furball\source\repos\TaxCalculator\TaxCalculator\obj\Debug\netcoreapp3.1\TaxCalculator.dll
 C:\Users\Furball\source\repos\TaxCalculator\TaxCalculator\obj\Debug\netcoreapp3.1\TaxCalculator.pdb
 C:\Users\Furball\source\repos\TaxCalculator\TaxCalculator\obj\Debug\netcoreapp3.1\TaxCalculator.genruntimeconfig.cache
+C:\Users\Furball\source\repos\TaxCalculator\TaxCalculator\obj\Debug\netcoreapp3.1\Razor\Views\Calculator\Index.cshtml.g.cs

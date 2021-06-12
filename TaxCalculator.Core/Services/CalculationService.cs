@@ -36,13 +36,13 @@ namespace TaxCalculator.Core.Services
 
                 case Core.Enums.CalculationTypeEnum.FlatValue:
 
-                    var flatValueType = _unitOfWork.FlatRates.GetFirstAvailable();
+                    var flatValueType = _unitOfWork.FlatValues.GetFirstAvailable();
                     totalTax = flatValueType.CalculateResult(annualIncome);
                     break;
 
                 case Core.Enums.CalculationTypeEnum.Progressive:
 
-                    var progressionType = _unitOfWork.FlatRates.GetFirstAvailable();
+                    var progressionType = _unitOfWork.Progressives.GetFirstAvailable();
                     totalTax = progressionType.CalculateResult(annualIncome);
                     break;
 
