@@ -3,9 +3,10 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using TaxCalculator.API.Dtos;
+using TaxCalculator.Core.Dtos;
 using TaxCalculator.Core.Models;
 using TaxCalculator.Core.Models.CalculationTypes;
+using TaxCalculator.Core.Services;
 
 namespace TaxCalculator.API.Controllers
 {
@@ -14,65 +15,71 @@ namespace TaxCalculator.API.Controllers
     public class CalculationController : ControllerBase
     {
         private readonly IUnitOfWork _unitOfWork;        
+        private readonly ICalculationService _calculationService;        
 
-        public CalculationController(IUnitOfWork unitOfWork)
+        public CalculationController(IUnitOfWork unitOfWork,
+            ICalculationService calculationService)
         {
             _unitOfWork = unitOfWork;
+            _calculationService = calculationService;
         }
 
         [Route("DoTaxCalculation/{annualIncome}/{code}")]
         [HttpGet]
         public CalculationResultDto DoTaxCalculation(decimal annualIncome, string code)
         {
-            if (code == null)
-                throw new Exception("Invalid postal code.");
+            return _calculationService.ReturnDtoAndSave(annualIncome, code);
 
-            //get tax type
-            var postalCode = _unitOfWork.PostalCodes.GetByCode(code);
 
-            if(postalCode == null)
-                throw new Exception("Postal Code not on record.");
+            //if (code == null)
+            //    throw new Exception("Invalid postal code.");
 
-            //TODO: Comment over decision here and probs domain service?
-            //OR CONVERT TO ID
-            //TODO: Save to db after successful calc
-            var totalTax = 0m;
-            switch (postalCode.CalculationType) {
+            ////get tax type
+            //var postalCode = _unitOfWork.PostalCodes.GetByCode(code);
 
-                case Core.Enums.CalculationTypeEnum.FlatRate:
+            //if(postalCode == null)
+            //    throw new Exception("Postal Code not on record.");
 
-                    var flatRateType = _unitOfWork.FlatRates.GetFirstAvailable();
-                    totalTax = flatRateType.CalculateResult(annualIncome);
-                    break;
+            ////TODO: Comment over decision here and probs domain service?
+            ////OR CONVERT TO ID
+            ////TODO: Save to db after successful calc
+            //var totalTax = 0m;
+            //switch (postalCode.CalculationType) {
 
-                case Core.Enums.CalculationTypeEnum.FlatValue:
+            //    case Core.Enums.CalculationTypeEnum.FlatRate:
 
-                    var flatValueType = _unitOfWork.FlatRates.GetFirstAvailable();
-                    totalTax = flatValueType.CalculateResult(annualIncome);
-                    break;
+            //        var flatRateType = _unitOfWork.FlatRates.GetFirstAvailable();
+            //        totalTax = flatRateType.CalculateResult(annualIncome);
+            //        break;
 
-                case Core.Enums.CalculationTypeEnum.Progressive:
+            //    case Core.Enums.CalculationTypeEnum.FlatValue:
 
-                    var progressionType = _unitOfWork.FlatRates.GetFirstAvailable();
-                    totalTax = progressionType.CalculateResult(annualIncome);
-                    break;
+            //        var flatValueType = _unitOfWork.FlatRates.GetFirstAvailable();
+            //        totalTax = flatValueType.CalculateResult(annualIncome);
+            //        break;
 
-                //TODO: Handle this result
-                default:
-                    throw new Exception("Postal Code contains no tax details.");
-            }
+            //    case Core.Enums.CalculationTypeEnum.Progressive:
 
-            //save to DB TODO: probs move this
-            _unitOfWork.CalculationResults.Add(new Core.Models.CalculationResults.CalculationResult()
-            {
-                AnnualIncome = annualIncome,
-                CalculatedTax = totalTax,
-                DateTimeCreated = DateTime.Now,
-                PostalCode = postalCode.Description
-            });
-            _unitOfWork.Complete();
+            //        var progressionType = _unitOfWork.FlatRates.GetFirstAvailable();
+            //        totalTax = progressionType.CalculateResult(annualIncome);
+            //        break;
 
-            return BuildResultDto(annualIncome, totalTax);
+            //    //TODO: Handle this result
+            //    default:
+            //        throw new Exception("Postal Code contains no tax details.");
+            //}
+
+            ////save to DB TODO: probs move this
+            //_unitOfWork.CalculationResults.Add(new Core.Models.CalculationResults.CalculationResult()
+            //{
+            //    AnnualIncome = annualIncome,
+            //    CalculatedTax = totalTax,
+            //    DateTimeCreated = DateTime.Now,
+            //    PostalCode = postalCode.Description
+            //});
+            //_unitOfWork.Complete();
+
+            //return BuildResultDto(annualIncome, totalTax);
         }
 
         [Route("GetFlatRates")]
@@ -89,16 +96,16 @@ namespace TaxCalculator.API.Controllers
             return await _unitOfWork.FlatRates.Get(id);
         }
 
-        private CalculationResultDto BuildResultDto(decimal originalIncome, decimal taxTotal)
-        {
-            return new CalculationResultDto()
-            {
-                OriginalIncome = originalIncome,
-                TotalTaxes = taxTotal,
-                IncomeAfterTax = originalIncome - taxTotal,
-                TotalMonthlyTaxes = taxTotal / 12,
-                TotalTaxPercentage = taxTotal / originalIncome * 100,
-            };
-        }
+        //private CalculationResultDto BuildResultDto(decimal originalIncome, decimal taxTotal)
+        //{
+        //    return new CalculationResultDto()
+        //    {
+        //        OriginalIncome = originalIncome,
+        //        TotalTaxes = taxTotal,
+        //        IncomeAfterTax = originalIncome - taxTotal,
+        //        TotalMonthlyTaxes = taxTotal / 12,
+        //        TotalTaxPercentage = taxTotal / originalIncome * 100,
+        //    };
+        //}
     }
 }
