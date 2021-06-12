@@ -32,15 +32,15 @@ $('#btnSubmit').on('click', function () {
 
     if (income == '' || postalCode == '')
         $('#warning').show();
-    else {
-
-        $('#results').show();
+    else {        
 
         $.ajax({
             url: "http://localhost:5000/Calculation/DoTaxCalculation/" + income + "/" + postalCode,
             type: "Get",
             async: true,
             success: function (data) {
+
+                $('#results').show();
 
                 $('#totalTaxValue').text(data.totalTaxes.toFixed(2));
                 $('#totalTaxPercentage').text(data.totalTaxPercentage.toFixed(2) + "%");
@@ -63,8 +63,14 @@ $('#btnSubmit').on('click', function () {
                     }
                 }
             },
-            error: function (request, message, error) {
-                alert(error);
+            error: function (XMLHttpRequest, textStatus, errorThrown) {
+
+                var json = XMLHttpRequest.responseJSON.error;                
+                $('#messageModalText').text(json);
+                $('#messegeModalHeader').html("Warnings");
+                $('.modal-header').addClass('bg-danger');
+                $('#messageModal').modal('show');
+
             }
         });
     }
