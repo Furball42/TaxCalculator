@@ -25,7 +25,7 @@ namespace TaxCalculator.Repo
             services.AddTransient<IUnitOfWork, UnitOfWork>();
 
             services.AddDbContext<TaxCalculatorDbContext>(opt => opt
-                .UseSqlServer("Server=NOSTROMO\\SQLEXPRESS; Database=taxCalcDb;persist security info=True; Integrated Security = SSPI;"));
+                .UseSqlServer("Server=(localdb)\\MSSQLLocalDB; Database=taxCalcDb;persist security info=True; Integrated Security = SSPI;"));
 
             return services;
         }
