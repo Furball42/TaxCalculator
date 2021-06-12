@@ -64,7 +64,7 @@ $('#btnSubmit').on('click', function () {
                 }
             },
             error: function (request, message, error) {
-                alert(message);
+                alert(error);
             }
         });
     }

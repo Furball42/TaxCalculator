@@ -28,7 +28,11 @@ namespace TaxCalculator.API.Controllers
         [HttpGet]
         public async Task<CalculationResultDto> DoTaxCalculation(decimal annualIncome, string code)
         {
-            return await _calculationService.ReturnDtoAndSave(annualIncome, code);
+            throw new Exception("test");
+
+            //throw new HttpResponseException(HttpStatusCode.NotFound);
+
+            //return await _calculationService.ReturnDtoAndSave(annualIncome, code);
 
 
             //if (code == null)

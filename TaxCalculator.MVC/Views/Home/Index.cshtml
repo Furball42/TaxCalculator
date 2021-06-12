@@ -5,5 +5,17 @@
 <div class="text-center">
     <h1 class="display-4">Tax Calculator</h1>
     <p>This is a assessment project for Pay Space. It contains a tax calculator that follows the specified parameters.</p>
-    <button class="form-control bg-primary" id="btnContinue">Continue to Calculator</button>
+    <div class="offset-4 col-md-4">
+        <button class="form-control bg-primary" id="btnContinue" style="color:white;">Continue to Calculator</button>
+    </div>    
 </div>
+
+@section scripts {
+
+    <script type="text/javascript">
+        $('#btnContinue').on('click', function () {
+            window.location = "/Calculator";
+        });
+    </script>   
+
+}
