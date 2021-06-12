@@ -12,6 +12,7 @@ namespace TaxCalculator.Core.Models.CalculationResults
 
         [Column(TypeName = "decimal(18,2)")]
         public decimal AnnualIncome { get; set; }
+
         public string PostalCode { get; set; }
 
         [Column(TypeName = "decimal(18,2)")]

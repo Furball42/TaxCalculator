@@ -7,6 +7,7 @@ using TaxCalculator.Core.Models;
 using TaxCalculator.Core.Models.CalculationResults;
 using TaxCalculator.Core.Models.CalculationTypes;
 using TaxCalculator.Core.Models.PostalCodes;
+using TaxCalculator.Core.Services;
 
 namespace TaxCalculator.Repo
 {
@@ -19,6 +20,8 @@ namespace TaxCalculator.Repo
             services.AddTransient<ICalculationResultRepository, CalculationResultRepository>();
             services.AddTransient<IProgressiveRepository, ProgressiveRepository>();
             services.AddTransient<IPostalCodeRepository, PostalCodeRepository>();
+            services.AddTransient<IDomainService, DomainService>();
+            services.AddTransient<ICalculationService, CalculationService>();
             services.AddTransient<IUnitOfWork, UnitOfWork>();
 
             services.AddDbContext<TaxCalculatorDbContext>(opt => opt

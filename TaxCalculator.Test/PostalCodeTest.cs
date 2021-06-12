@@ -10,6 +10,7 @@ using TaxCalculator.Repo;
 
 namespace TaxCalculator.Test
 {
+    [TestFixture]
     public class PostalCodeTest
     {
         public SortedList<string, decimal> TestUserEntries = new SortedList<string, decimal>();
@@ -30,7 +31,6 @@ namespace TaxCalculator.Test
         [Test]
         public void PostalCode_GetByCode_ShouldReturnCorrectCodeByCode()
         {
-           
             //var result = _unitOfWork.PostalCodes.GetByCode(TestUserEntries.Keys[1]);
 
             //Assert.IsNotNull(result);

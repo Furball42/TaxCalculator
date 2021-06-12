@@ -1,8 +1,10 @@
 {
   "version": 2,
-  "dgSpecHash": "5hpC/gZqLtUY/bOzvKSXFtt3Tf2FfYbabeiUYJyo5s326KHZ1iVJgt3lPJBy9ANg+Vl1R4TpGDvZk1XMLJT/BA==",
+  "dgSpecHash": "r7lHkyynoIja+HuTufm8vtzvMTqHL4wRh1fAD170QYb7IRw1SVfM8kvICToRjRz2mxMfB1uNK7lKcXRevf1Cjw==",
   "success": true,
   "projectFilePath": "C:\\Users\\Furball\\source\\repos\\TaxCalculator\\TaxCalculator.Core\\TaxCalculator.Core.csproj",
-  "expectedPackageFiles": [],
+  "expectedPackageFiles": [
+    "C:\\Users\\Furball\\.nuget\\packages\\newtonsoft.json\\13.0.1\\newtonsoft.json.13.0.1.nupkg.sha512"
+  ],
   "logs": []
 }

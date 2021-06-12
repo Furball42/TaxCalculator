@@ -3,8 +3,10 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using TaxCalculator.Core.Dtos;
 using TaxCalculator.Core.Models;
 using TaxCalculator.Core.Models.CalculationTypes;
+using TaxCalculator.Core.Services;
 
 namespace TaxCalculator.API.Controllers
 {
@@ -13,62 +15,97 @@ namespace TaxCalculator.API.Controllers
     public class CalculationController : ControllerBase
     {
         private readonly IUnitOfWork _unitOfWork;        
+        private readonly ICalculationService _calculationService;        
 
-        public CalculationController(IUnitOfWork unitOfWork)
+        public CalculationController(IUnitOfWork unitOfWork,
+            ICalculationService calculationService)
         {
             _unitOfWork = unitOfWork;
+            _calculationService = calculationService;
         }
 
-        [Route("DoTaxCalculation/{annualIncome:decimal}/{postalCode:string}")]
+        [Route("DoTaxCalculation/{annualIncome}/{code}")]
         [HttpGet]
-        public async Task<decimal> DoTaxCalculation(decimal annualIncome, string code)
+        public CalculationResultDto DoTaxCalculation(decimal annualIncome, string code)
         {
-            //get tax type
-            var postalCode = _unitOfWork.PostalCodes.GetByCode(code);
+            return _calculationService.ReturnDtoAndSave(annualIncome, code);
 
-            //TODO: Comment over decision here
-            //OR CONVERT TO ID
-            switch (postalCode.CalculationType) {
-                case Core.Enums.CalculationTypeEnum.FlatRate:
 
-                    var flatRateType = _unitOfWork.FlatRates.GetFirstAvailable();
+            //if (code == null)
+            //    throw new Exception("Invalid postal code.");
 
-                    break;
+            ////get tax type
+            //var postalCode = _unitOfWork.PostalCodes.GetByCode(code);
 
-                case Core.Enums.CalculationTypeEnum.FlatValue:
+            //if(postalCode == null)
+            //    throw new Exception("Postal Code not on record.");
 
-                    var flatValueType = _unitOfWork.FlatRates.GetFirstAvailable();
+            ////TODO: Comment over decision here and probs domain service?
+            ////OR CONVERT TO ID
+            ////TODO: Save to db after successful calc
+            //var totalTax = 0m;
+            //switch (postalCode.CalculationType) {
 
-                    break;
+            //    case Core.Enums.CalculationTypeEnum.FlatRate:
 
-                case Core.Enums.CalculationTypeEnum.Progressive:
+            //        var flatRateType = _unitOfWork.FlatRates.GetFirstAvailable();
+            //        totalTax = flatRateType.CalculateResult(annualIncome);
+            //        break;
 
-                    var progressionType = _unitOfWork.FlatRates.GetFirstAvailable();
+            //    case Core.Enums.CalculationTypeEnum.FlatValue:
 
-                    break;
+            //        var flatValueType = _unitOfWork.FlatRates.GetFirstAvailable();
+            //        totalTax = flatValueType.CalculateResult(annualIncome);
+            //        break;
 
-                //TODO: Handle this result
-                default:
+            //    case Core.Enums.CalculationTypeEnum.Progressive:
 
-                    break;
+            //        var progressionType = _unitOfWork.FlatRates.GetFirstAvailable();
+            //        totalTax = progressionType.CalculateResult(annualIncome);
+            //        break;
 
-            }
+            //    //TODO: Handle this result
+            //    default:
+            //        throw new Exception("Postal Code contains no tax details.");
+            //}
 
-            return 0;
+            ////save to DB TODO: probs move this
+            //_unitOfWork.CalculationResults.Add(new Core.Models.CalculationResults.CalculationResult()
+            //{
+            //    AnnualIncome = annualIncome,
+            //    CalculatedTax = totalTax,
+            //    DateTimeCreated = DateTime.Now,
+            //    PostalCode = postalCode.Description
+            //});
+            //_unitOfWork.Complete();
+
+            //return BuildResultDto(annualIncome, totalTax);
         }
 
-        [Route("getflatrates")]
+        [Route("GetFlatRates")]
         [HttpGet]        
         public async Task<IEnumerable<FlatRate>> GetFlatRates()
         {
             return await _unitOfWork.FlatRates.GetAll();
         }
 
-        [Route("getflatrate/{id:int}")]
+        [Route("GetFlatRate/{id}")]
         [HttpGet]
         public async Task<FlatRate> GetFlatRateById(int id)
         {
             return await _unitOfWork.FlatRates.Get(id);
         }
+
+        //private CalculationResultDto BuildResultDto(decimal originalIncome, decimal taxTotal)
+        //{
+        //    return new CalculationResultDto()
+        //    {
+        //        OriginalIncome = originalIncome,
+        //        TotalTaxes = taxTotal,
+        //        IncomeAfterTax = originalIncome - taxTotal,
+        //        TotalMonthlyTaxes = taxTotal / 12,
+        //        TotalTaxPercentage = taxTotal / originalIncome * 100,
+        //    };
+        //}
     }
 }

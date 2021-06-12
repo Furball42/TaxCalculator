@@ -12,9 +12,12 @@ namespace TaxCalculator.Core.Models.CalculationTypes
         [Column(TypeName = "decimal(4,2)")]
         public decimal Rate { get; set; }
 
-        public override decimal CalculateResult()
+        public override decimal CalculateResult(decimal annualIncome)
         {
-            throw new NotImplementedException();
+            if(annualIncome > 0)
+                return annualIncome / 100 * Rate;
+            else
+                throw new ArgumentException("No negative income value allowed.");
         }
     }
 }
