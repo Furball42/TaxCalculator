@@ -19,52 +19,52 @@ namespace TaxCalculator.API.Controllers
             _unitOfWork = unitOfWork;
         }
 
-        [Route("DoTaxCalculation/{annualIncome:decimal}/{postalCode:string}")]
+        [Route("DoTaxCalculation/{annualIncome}/{code}")]
         [HttpGet]
         public async Task<decimal> DoTaxCalculation(decimal annualIncome, string code)
         {
+            if (code == null)
+                throw new Exception("Invalid postal code.");
+
             //get tax type
             var postalCode = _unitOfWork.PostalCodes.GetByCode(code);
+
+            if(postalCode == null)
+                throw new Exception("Postal Code not on record.");
 
             //TODO: Comment over decision here
             //OR CONVERT TO ID
             switch (postalCode.CalculationType) {
+
                 case Core.Enums.CalculationTypeEnum.FlatRate:
 
                     var flatRateType = _unitOfWork.FlatRates.GetFirstAvailable();
-
-                    break;
+                    return flatRateType.CalculateResult(annualIncome);
 
                 case Core.Enums.CalculationTypeEnum.FlatValue:
 
                     var flatValueType = _unitOfWork.FlatRates.GetFirstAvailable();
-
-                    break;
+                    return flatValueType.CalculateResult(annualIncome);
 
                 case Core.Enums.CalculationTypeEnum.Progressive:
 
                     var progressionType = _unitOfWork.FlatRates.GetFirstAvailable();
-
-                    break;
+                    return progressionType.CalculateResult(annualIncome);
 
                 //TODO: Handle this result
                 default:
-
-                    break;
-
+                    throw new Exception("Postal Code contains no tax details.");
             }
-
-            return 0;
         }
 
-        [Route("getflatrates")]
+        [Route("GetFlatRates")]
         [HttpGet]        
         public async Task<IEnumerable<FlatRate>> GetFlatRates()
         {
             return await _unitOfWork.FlatRates.GetAll();
         }
 
-        [Route("getflatrate/{id:int}")]
+        [Route("GetFlatRate/{id}")]
         [HttpGet]
         public async Task<FlatRate> GetFlatRateById(int id)
         {

@@ -11,7 +11,7 @@ namespace TaxCalculator.Core.Models.CalculationTypes
         [Required]
         public string ExtendedData { get; set; }
 
-        public override  decimal CalculateResult(decimal annualIncome)
+        public override decimal CalculateResult(decimal annualIncome)
         {
             if (annualIncome > 0)
             {

@@ -99,7 +99,7 @@ namespace TaxCalculator.Test
         }
 
         [Test]
-        public void Progressive_ReferenceDataCount_SmallerThanZero_Exception_Success()
+        public void Progressive_ExtendedDataCount_SmallerThanZero_Exception_Success()
         {
             var progressive = new Progressive
             {
@@ -119,7 +119,6 @@ namespace TaxCalculator.Test
 
             var result = progressive.CalculateResult(150000);
 
-            //TODO: maybe change all test to look for a list
             Assert.IsNotNull(result);
             Assert.AreEqual(35719.320, result);
         }

@@ -16,7 +16,14 @@ namespace TaxCalculator.Repo
 
         public PostalCode GetByCode(string code)
         {
-            return  (PostalCode)_context.PostalCodes.Where(p => p.Description == code);
+            try
+            {
+                return _context.PostalCodes.FirstOrDefault(p => p.Description == code);
+            }
+            catch (Exception)
+            {
+                throw new Exception("Postal Code not on record.");
+            }
         }
     }
 }
