@@ -26,9 +26,9 @@ namespace TaxCalculator.API.Controllers
 
         [Route("DoTaxCalculation/{annualIncome}/{code}")]
         [HttpGet]
-        public CalculationResultDto DoTaxCalculation(decimal annualIncome, string code)
+        public async Task<CalculationResultDto> DoTaxCalculation(decimal annualIncome, string code)
         {
-            return _calculationService.ReturnDtoAndSave(annualIncome, code);
+            return await _calculationService.ReturnDtoAndSave(annualIncome, code);
 
 
             //if (code == null)

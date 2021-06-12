@@ -1,7 +1,9 @@
-﻿using System;
+﻿using Microsoft.EntityFrameworkCore;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Threading.Tasks;
 using TaxCalculator.Core.Models.CalculationTypes;
 
 namespace TaxCalculator.Repo
@@ -13,9 +15,9 @@ namespace TaxCalculator.Repo
 
         }
 
-        public FlatValue GetFirstAvailable()
+        public async Task<FlatValue> GetFirstAvailable()
         {
-            return _context.FlatValues.FirstOrDefault();
+            return await _context.FlatValues.FirstOrDefaultAsync();
         }
     }
 }

@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.EntityFrameworkCore;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -14,11 +15,11 @@ namespace TaxCalculator.Repo
 
         }
 
-        public PostalCode GetByCode(string code)
+        public async Task<PostalCode> GetByCode(string code)
         {
             try
             {
-                return _context.PostalCodes.FirstOrDefault(p => p.Description == code);
+                return await _context.PostalCodes.FirstOrDefaultAsync(p => p.Description == code);
             }
             catch (Exception)
             {

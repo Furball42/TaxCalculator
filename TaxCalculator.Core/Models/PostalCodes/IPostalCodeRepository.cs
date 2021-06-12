@@ -7,6 +7,6 @@ namespace TaxCalculator.Core.Models.PostalCodes
 {
     public interface IPostalCodeRepository : IRepository<PostalCode>
     {
-        PostalCode GetByCode(string code);
+        Task<PostalCode> GetByCode(string code);
     }
 }

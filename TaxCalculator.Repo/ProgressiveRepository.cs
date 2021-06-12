@@ -1,7 +1,9 @@
-﻿using System;
+﻿using Microsoft.EntityFrameworkCore;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Threading.Tasks;
 using TaxCalculator.Core.Models.CalculationTypes;
 
 namespace TaxCalculator.Repo
@@ -13,9 +15,9 @@ namespace TaxCalculator.Repo
 
         }
 
-        public Progressive GetFirstAvailable()
+        public async Task<Progressive> GetFirstAvailable()
         {
-            return _context.Progressives.FirstOrDefault();
+            return await _context.Progressives.FirstOrDefaultAsync();
         }
     }
 }

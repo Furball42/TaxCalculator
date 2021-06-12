@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using System.Threading.Tasks;
 using TaxCalculator.Core.Dtos;
 using TaxCalculator.Core.Enums;
 using TaxCalculator.Core.Models;
@@ -18,9 +19,9 @@ namespace TaxCalculator.Core.Services
             _unitOfWork = unitOfWork;
         }
 
-        public CalculationResultDto ReturnDtoAndSave(decimal annualIncome, string postalCode)
+        public async Task<CalculationResultDto> ReturnDtoAndSave(decimal annualIncome, string postalCode)
         {
-            var code = GetPostalCode(postalCode);
+            var code = await GetPostalCode(postalCode);
             var totalTax = 0m;
             var levelList = new List<ProgressiveTaxByLevelDto>();
 
@@ -32,19 +33,19 @@ namespace TaxCalculator.Core.Services
 
                 case Core.Enums.CalculationTypeEnum.FlatRate:
 
-                    var flatRateType = _unitOfWork.FlatRates.GetFirstAvailable();
+                    var flatRateType = await _unitOfWork.FlatRates.GetFirstAvailable();
                     totalTax = flatRateType.CalculateResult(annualIncome);
                     break;
 
                 case Core.Enums.CalculationTypeEnum.FlatValue:
 
-                    var flatValueType = _unitOfWork.FlatValues.GetFirstAvailable();
+                    var flatValueType = await _unitOfWork.FlatValues.GetFirstAvailable();
                     totalTax = flatValueType.CalculateResult(annualIncome);
                     break;
 
                 case Core.Enums.CalculationTypeEnum.Progressive:
 
-                    var progressionType = _unitOfWork.Progressives.GetFirstAvailable();
+                    var progressionType = await _unitOfWork.Progressives.GetFirstAvailable();
                     totalTax = progressionType.CalculateResult(annualIncome);
                     levelList = progressionType.CalculateTaxPerLevel(annualIncome);
                     break;
@@ -68,9 +69,9 @@ namespace TaxCalculator.Core.Services
             
         }
 
-        private PostalCode GetPostalCode(string postalCode)
+        private async Task<PostalCode> GetPostalCode(string postalCode)
         {
-            return _unitOfWork.PostalCodes.GetByCode(postalCode);
+            return await _unitOfWork.PostalCodes.GetByCode(postalCode);
         }
 
         private CalculationResultDto BuildResult(decimal originalIncome, decimal taxTotal, List<ProgressiveTaxByLevelDto> levelList)
