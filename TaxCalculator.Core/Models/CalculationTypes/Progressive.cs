@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Text;
+using TaxCalculator.Core.Dtos;
 
 namespace TaxCalculator.Core.Models.CalculationTypes
 {
@@ -26,6 +27,9 @@ namespace TaxCalculator.Core.Models.CalculationTypes
                 {
                     if (annualIncome > level.Min)
                     {
+                        if (level.Max == -1)
+                            level.Max = annualIncome; //flag for infinite above upper level
+
                         var taxableThisRate = Math.Min(level.Max - level.Min, annualIncome - level.Min);
                         var taxOnThisLevel = taxableThisRate / 100 * level.Rate;
                         totalTax += taxOnThisLevel;
@@ -36,6 +40,37 @@ namespace TaxCalculator.Core.Models.CalculationTypes
             }
             else
                 throw new ArgumentException("No negative income value allowed.");
+        }
+
+        public List<ProgressiveTaxByLevelDto> CalculateTaxPerLevel(decimal annualIncome)
+        {
+            var taxLevels = DeserializeExtendedData();
+            var returnList = new List<ProgressiveTaxByLevelDto>();
+
+            if (taxLevels.Count == 0)
+                throw new Exception("Reference data empty");
+
+            foreach (var level in taxLevels)
+            {
+                if (annualIncome > level.Min)
+                {
+                    if (level.Max == -1)
+                        level.Max = annualIncome; //flag for infinite above upper level
+
+                    var taxableThisRate = Math.Min(level.Max - level.Min, annualIncome - level.Min);
+                    var taxOnThisLevel = taxableThisRate / 100 * level.Rate;
+
+                    returnList.Add(new ProgressiveTaxByLevelDto()
+                    {
+                        LevelTax = taxOnThisLevel,
+                        Max = level.Max,
+                        Min = level.Min,
+                        Rate = level.Rate,
+                    });
+                }
+            }
+
+            return returnList;
         }
 
         private List<ProgressiveTypeValues> DeserializeExtendedData()

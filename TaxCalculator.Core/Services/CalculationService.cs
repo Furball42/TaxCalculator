@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 using TaxCalculator.Core.Dtos;
+using TaxCalculator.Core.Enums;
 using TaxCalculator.Core.Models;
 using TaxCalculator.Core.Models.CalculationTypes;
 using TaxCalculator.Core.Models.PostalCodes;
@@ -21,6 +22,7 @@ namespace TaxCalculator.Core.Services
         {
             var code = GetPostalCode(postalCode);
             var totalTax = 0m;
+            var levelList = new List<ProgressiveTaxByLevelDto>();
 
             if (code == null)
                 throw new Exception("Postal Code not on record.");
@@ -44,6 +46,7 @@ namespace TaxCalculator.Core.Services
 
                     var progressionType = _unitOfWork.Progressives.GetFirstAvailable();
                     totalTax = progressionType.CalculateResult(annualIncome);
+                    levelList = progressionType.CalculateTaxPerLevel(annualIncome);
                     break;
 
                 //TODO: Handle this result
@@ -51,7 +54,7 @@ namespace TaxCalculator.Core.Services
                     throw new Exception("Postal Code contains no tax details.");
             }
 
-            var result = BuildResult(annualIncome, totalTax);
+            var result = BuildResult(annualIncome, totalTax, levelList);
 
             try
             {
@@ -70,8 +73,8 @@ namespace TaxCalculator.Core.Services
             return _unitOfWork.PostalCodes.GetByCode(postalCode);
         }
 
-        private CalculationResultDto BuildResult(decimal originalIncome, decimal taxTotal)
-        {
+        private CalculationResultDto BuildResult(decimal originalIncome, decimal taxTotal, List<ProgressiveTaxByLevelDto> levelList)
+        {            
             return new CalculationResultDto()
             {
                 OriginalIncome = originalIncome,
@@ -79,6 +82,7 @@ namespace TaxCalculator.Core.Services
                 IncomeAfterTax = originalIncome - taxTotal,
                 TotalMonthlyTaxes = taxTotal / 12,
                 TotalTaxPercentage = taxTotal / originalIncome * 100,
+                ProgressiveTaxByLevel = levelList,
             };
         }
 
