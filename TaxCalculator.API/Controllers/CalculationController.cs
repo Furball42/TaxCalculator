@@ -28,7 +28,6 @@ namespace TaxCalculator.API.Controllers
         }
 
         [Route("DoTaxCalculation/{annualIncome}/{code}")]
-        [HttpGet]
         public async Task<CalculationResultDto> DoTaxCalculation(decimal annualIncome, string code)
         {
             return await _calculationService.ReturnDtoAndSave(annualIncome, code);
@@ -36,7 +35,6 @@ namespace TaxCalculator.API.Controllers
 
         //generic call
         [Route("GetCalculations")]
-        [HttpGet]
         public async Task<List<CalculationListOutputDto>> GetCalculations()
         {
             var list = await _unitOfWork.CalculationResults.GetAll();            
@@ -46,7 +44,6 @@ namespace TaxCalculator.API.Controllers
 
         //specific for datatables
         [Route("GetCalculationsForDatables")]
-        [HttpGet]
         public async Task<DataTablesResponseDto> GetCalculationsForDatables()
         {
             var list = await _unitOfWork.CalculationResults.GetAll();

@@ -26,7 +26,6 @@ namespace TaxCalculator.API.Controllers
         }
 
         [Route("GetPostalCodes")]
-        [HttpGet]
         public async Task<List<PostalCodeListOutputDto>> GetPostalCodes()
         {
             var list = await _unitOfWork.PostalCodes.GetAll();
@@ -35,7 +34,6 @@ namespace TaxCalculator.API.Controllers
         }
 
         [Route("DeletePostalCode/{id}")]
-        [HttpDelete]
         public async Task DeletePostalCode(int id)
         {
             var postalCode = await _unitOfWork.PostalCodes.Get(id);
@@ -48,11 +46,10 @@ namespace TaxCalculator.API.Controllers
         }
 
         [Route("PutPostalCode")]
-        [HttpPut]
         public async Task PutPostalCode(PostalCode postalCode)
         {
             //this step is arguable - is here for error checking
-            var postalCodeCurrent = await _unitOfWork.PostalCodes.Get(postalCode.Id);            
+            var postalCodeCurrent = await _unitOfWork.PostalCodes.GetByIdSilently(postalCode.Id);            
             if (postalCodeCurrent == null)
                 throw new Exception("Postal Code not on record.");
 
@@ -61,7 +58,6 @@ namespace TaxCalculator.API.Controllers
         }
 
         [Route("GetCalculationTypes")]
-        [HttpGet]
         public List<CalculationTypeListDto> GetCalculationTypes()
         {
             var list = new List<CalculationTypeListDto>();
@@ -79,7 +75,6 @@ namespace TaxCalculator.API.Controllers
 
         //specific for datatables
         [Route("GetPostalCodesForDatables")]
-        [HttpGet]
         public async Task<DataTablesResponseDto> GetPostalCodesForDatables()
         {
             var list = await _unitOfWork.PostalCodes.GetAll();
@@ -92,7 +87,6 @@ namespace TaxCalculator.API.Controllers
         }
 
         [Route("PostPostalCode")]
-        [HttpPost]
         public async Task<bool> PostPostalCode(PostalCode postalCode)
         {
             //this bit is to set the reference id to the first availble type in db matching the Calc type

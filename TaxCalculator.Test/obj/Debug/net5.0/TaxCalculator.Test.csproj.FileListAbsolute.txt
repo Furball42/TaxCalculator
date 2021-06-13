@@ -143,3 +143,5 @@ C:\Users\Furball\source\repos\TaxCalculator\TaxCalculator.Test\obj\Debug\net5.0\
 C:\Users\Furball\source\repos\TaxCalculator\TaxCalculator.Test\obj\Debug\net5.0\ref\TaxCalculator.Test.dll
 C:\Users\Furball\source\repos\TaxCalculator\TaxCalculator.Test\obj\Debug\net5.0\TaxCalculator.Test.pdb
 C:\Users\Furball\source\repos\TaxCalculator\TaxCalculator.Test\obj\Debug\net5.0\TaxCalculator.Test.genruntimeconfig.cache
+C:\Users\Furball\source\repos\TaxCalculator\TaxCalculator.Test\bin\Debug\net5.0\AutoMapper.dll
+C:\Users\Furball\source\repos\TaxCalculator\TaxCalculator.Test\bin\Debug\net5.0\AutoMapper.Extensions.Microsoft.DependencyInjection.dll

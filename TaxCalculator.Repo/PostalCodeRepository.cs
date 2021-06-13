@@ -22,5 +22,17 @@ namespace TaxCalculator.Repo
                 throw new Exception("Postal Code not on record.");
             }
         }
+
+        public async Task<PostalCode> GetByIdSilently(int id)
+        {
+            try
+            {
+                return await _context.PostalCodes.AsNoTracking().FirstOrDefaultAsync(p => p.Id == id);
+            }
+            catch (Exception)
+            {
+                throw new Exception("Postal Code not on record.");
+            }
+        }
     }
 }
