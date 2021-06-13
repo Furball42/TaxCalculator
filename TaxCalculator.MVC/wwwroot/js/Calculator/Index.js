@@ -4,6 +4,12 @@
     $('#results').hide();
     $('#levelTable').hide();
 
+
+});
+
+$("#txtIncome").change(function () {
+    var val = $("#txtIncome").val();
+    $("#txtIncome").val(parseFloat(val).toFixed(2).replace(',', '.'));
 });
 
 $('#btnReset').on('click', function () {
@@ -21,7 +27,6 @@ $('#btnReset').on('click', function () {
     $('#levelTable tbody tr').remove();
     $('#levelTable').hide();
 });
-
 
 $('#btnSubmit').on('click', function () {
     $('#levelTable tbody tr').remove();
