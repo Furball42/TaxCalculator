@@ -34,6 +34,32 @@ namespace TaxCalculator.API.Controllers
             return mapped;
         }
 
+        [Route("DeletePostalCode/{id}")]
+        [HttpDelete]
+        public async Task DeletePostalCode(int id)
+        {
+            var postalCode = await _unitOfWork.PostalCodes.Get(id);
+
+            if(postalCode == null)
+                throw new Exception("Postal Code not on record.");
+
+            _unitOfWork.PostalCodes.Delete(postalCode);
+            _unitOfWork.Complete();
+        }
+
+        [Route("PutPostalCode")]
+        [HttpPut]
+        public async Task PutPostalCode(PostalCode postalCode)
+        {
+            //this step is arguable - is here for error checking
+            var postalCodeCurrent = await _unitOfWork.PostalCodes.Get(postalCode.Id);            
+            if (postalCodeCurrent == null)
+                throw new Exception("Postal Code not on record.");
+
+            _unitOfWork.PostalCodes.Update(postalCode);
+            _unitOfWork.Complete();
+        }
+
         [Route("GetCalculationTypes")]
         [HttpGet]
         public List<CalculationTypeListDto> GetCalculationTypes()
