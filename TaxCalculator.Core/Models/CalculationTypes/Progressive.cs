@@ -2,7 +2,6 @@
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
-using System.Text;
 using TaxCalculator.Core.Dtos;
 
 namespace TaxCalculator.Core.Models.CalculationTypes
@@ -22,7 +21,7 @@ namespace TaxCalculator.Core.Models.CalculationTypes
                     throw new Exception("Reference data empty");
 
                 var totalTax = 0m;
-                
+
                 foreach (var level in taxLevels)
                 {
                     if (annualIncome > level.Min)
@@ -78,7 +77,7 @@ namespace TaxCalculator.Core.Models.CalculationTypes
             if (string.IsNullOrEmpty(ExtendedData))
                 return new List<ProgressiveTypeValues>();
 
-            var xxx =  JsonConvert.DeserializeObject<List<ProgressiveTypeValues>>(ExtendedData);
+            var xxx = JsonConvert.DeserializeObject<List<ProgressiveTypeValues>>(ExtendedData);
             return xxx;
         }
     }

@@ -1,11 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Text;
 using System.Threading.Tasks;
 using TaxCalculator.Core.Dtos;
-using TaxCalculator.Core.Enums;
 using TaxCalculator.Core.Models;
-using TaxCalculator.Core.Models.CalculationTypes;
 using TaxCalculator.Core.Models.PostalCodes;
 
 namespace TaxCalculator.Core.Services
@@ -30,21 +27,23 @@ namespace TaxCalculator.Core.Services
 
             switch (code.CalculationType)
             {
-
                 case Core.Enums.CalculationTypeEnum.FlatRate:
 
+                    //var flatRateType = await _unitOfWork.FlatRates.Get(code.ReferenceId); //can be used when more than one of the same type of tax exists
                     var flatRateType = await _unitOfWork.FlatRates.GetFirstAvailable();
                     totalTax = flatRateType.CalculateResult(annualIncome);
                     break;
 
                 case Core.Enums.CalculationTypeEnum.FlatValue:
 
+                    //var flatValueType = await _unitOfWork.FlatValues.Get(code.ReferenceId); //can be used when more than one of the same type of tax exists
                     var flatValueType = await _unitOfWork.FlatValues.GetFirstAvailable();
                     totalTax = flatValueType.CalculateResult(annualIncome);
                     break;
 
                 case Core.Enums.CalculationTypeEnum.Progressive:
 
+                    //var progressionType = await _unitOfWork.Progressives.Get(code.ReferenceId); //can be used when more than one of the same type of tax exists
                     var progressionType = await _unitOfWork.Progressives.GetFirstAvailable();
                     totalTax = progressionType.CalculateResult(annualIncome);
                     levelList = progressionType.CalculateTaxPerLevel(annualIncome);
@@ -66,7 +65,6 @@ namespace TaxCalculator.Core.Services
             {
                 throw new Exception("Error writing to database.");
             }
-            
         }
 
         private async Task<PostalCode> GetPostalCode(string postalCode)
@@ -75,7 +73,7 @@ namespace TaxCalculator.Core.Services
         }
 
         private CalculationResultDto BuildResult(decimal originalIncome, decimal taxTotal, List<ProgressiveTaxByLevelDto> levelList)
-        {            
+        {
             return new CalculationResultDto()
             {
                 OriginalIncome = originalIncome,

@@ -1,6 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Text;
 using TaxCalculator.Core.Models;
 using TaxCalculator.Core.Models.CalculationResults;
 using TaxCalculator.Core.Models.CalculationTypes;
@@ -11,12 +9,12 @@ namespace TaxCalculator.Repo
     public class UnitOfWork : IUnitOfWork
     {
         private readonly TaxCalculatorDbContext _context;
-        
+
         public ICalculationResultRepository CalculationResults { get; }
-        public IPostalCodeRepository PostalCodes {get; }
-        public IFlatRateRepository FlatRates {get; }
-        public IFlatValueRepository FlatValues {get; }
-        public IProgressiveRepository Progressives {get; }
+        public IPostalCodeRepository PostalCodes { get; }
+        public IFlatRateRepository FlatRates { get; }
+        public IFlatValueRepository FlatValues { get; }
+        public IProgressiveRepository Progressives { get; }
 
         public UnitOfWork(TaxCalculatorDbContext context,
             ICalculationResultRepository calcResultRepo,

@@ -1,9 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Newtonsoft.Json;
-using System;
 using System.Collections.Generic;
-using System.Text;
-using System.Text.Json;
 using TaxCalculator.Core.Models.CalculationResults;
 using TaxCalculator.Core.Models.CalculationTypes;
 using TaxCalculator.Core.Models.PostalCodes;
@@ -20,7 +17,6 @@ namespace TaxCalculator.Repo
 
         public TaxCalculatorDbContext(DbContextOptions<TaxCalculatorDbContext> options) : base(options)
         {
-
         }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
@@ -29,7 +25,7 @@ namespace TaxCalculator.Repo
 
             modelBuilder.Entity<FlatRate>()
                 .HasData(new FlatRate
-                { 
+                {
                     Id = 1,
                     Description = "Flat Rate",
                     Rate = 17.5m,

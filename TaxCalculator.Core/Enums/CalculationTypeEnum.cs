@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace TaxCalculator.Core.Enums
+﻿namespace TaxCalculator.Core.Enums
 {
     public enum CalculationTypeEnum
     {

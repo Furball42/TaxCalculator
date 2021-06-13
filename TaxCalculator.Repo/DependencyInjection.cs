@@ -1,8 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
-using System;
-using System.Collections.Generic;
-using System.Text;
 using TaxCalculator.Core.Models;
 using TaxCalculator.Core.Models.CalculationResults;
 using TaxCalculator.Core.Models.CalculationTypes;
@@ -20,7 +17,6 @@ namespace TaxCalculator.Repo
             services.AddTransient<ICalculationResultRepository, CalculationResultRepository>();
             services.AddTransient<IProgressiveRepository, ProgressiveRepository>();
             services.AddTransient<IPostalCodeRepository, PostalCodeRepository>();
-            services.AddTransient<IDomainService, DomainService>();
             services.AddTransient<ICalculationService, CalculationService>();
             services.AddTransient<IUnitOfWork, UnitOfWork>();
 

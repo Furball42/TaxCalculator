@@ -1,8 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
-using System.Text;
 
 namespace TaxCalculator.Core.Models.CalculationTypes
 {
@@ -29,7 +27,6 @@ namespace TaxCalculator.Core.Models.CalculationTypes
             }
             else
                 throw new ArgumentException("No negative income value allowed.");
-
         }
     }
 }
