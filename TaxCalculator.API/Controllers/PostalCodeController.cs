@@ -25,7 +25,7 @@ namespace TaxCalculator.API.Controllers
             _mapper = mapper;
         }
 
-        [Route("GetPostalCodes")]
+        [Route("GetAllPostalCodes")]
         [HttpGet]
         public async Task<List<PostalCodeListOutputDto>> GetAllPostalCodes()
         {

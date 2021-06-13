@@ -11,17 +11,17 @@ namespace TaxCalculator.Repo
     public static class DependencyInjection
     {
         public static IServiceCollection AddRepository(this IServiceCollection services)
-        {
+        {                     
+            services.AddDbContext<TaxCalculatorDbContext>(opt => opt
+                .UseSqlServer("Server=(localdb)\\MSSQLLocalDB; Database=taxCalcDb;persist security info=True; Integrated Security = SSPI;"));
+
+            services.AddTransient<IUnitOfWork, UnitOfWork>();
             services.AddTransient<IFlatRateRepository, FlatRateRepository>();
             services.AddTransient<IFlatValueRepository, FlatValueRepository>();
             services.AddTransient<ICalculationResultRepository, CalculationResultRepository>();
             services.AddTransient<IProgressiveRepository, ProgressiveRepository>();
             services.AddTransient<IPostalCodeRepository, PostalCodeRepository>();
             services.AddTransient<ICalculationService, CalculationService>();
-            services.AddTransient<IUnitOfWork, UnitOfWork>();
-
-            services.AddDbContext<TaxCalculatorDbContext>(opt => opt
-                .UseSqlServer("Server=(localdb)\\MSSQLLocalDB; Database=taxCalcDb;persist security info=True; Integrated Security = SSPI;"));
 
             return services;
         }

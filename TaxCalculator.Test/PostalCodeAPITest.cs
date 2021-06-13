@@ -85,19 +85,10 @@ namespace TaxCalculator.Test
         [Test]
         public void PostalCode_GetPostalCodes_ShouldNotReturnEmpty()
         {
-           
-            //var mockContext = new Mock<TaxCalculatorDbContext>();
-            //var calcResultRepositoryMock = new Mock<ICalculationResultRepository>();
-            //var flatRateRepositoryMock = new Mock<IFlatRateRepository>();
-            //var flatValueRepositoryMock = new Mock<IFlatValueRepository>();
-            //var progressRepositoryMock = new Mock<IProgressiveRepository>();
 
-
-            //var postalCode = new PostalCode() { Description = TestUserEntries.Keys[1] };
             var postalCodeList = GetPostalCodesForTesting();
 
             var postalCodeRepositoryMock = new Mock<IPostalCodeRepository>();
-            //postalCodeRepositoryMock.Setup(m => m.GetByCode(TestUserEntries.Keys[1])).ReturnsAsync(postalCode).Verifiable();
             postalCodeRepositoryMock.Setup(m => m.GetAll()).ReturnsAsync(postalCodeList).Verifiable();
 
             var unitOfWork = new Mock<IUnitOfWork>();
@@ -109,12 +100,11 @@ namespace TaxCalculator.Test
 
             var apiController = new PostalCodeController(unitOfWork.Object, mapper);
 
-            var result = apiController.GetPostalCodes().Result;
+            var result = apiController.GetAllPostalCodes ().Result;
 
 
             Assert.IsNotNull(result);
             Assert.IsNotEmpty(result);
-            //Assert.AreEqual(TestAgainstCodes[1].Description, result.Description);
         }
 
         private SortedList<string, decimal> UserEntries()
