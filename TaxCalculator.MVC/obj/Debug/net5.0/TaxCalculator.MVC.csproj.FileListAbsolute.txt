@@ -80,3 +80,4 @@ C:\Users\Furball\source\repos\TaxCalculator\TaxCalculator.MVC\obj\Debug\net5.0\r
 C:\Users\Furball\source\repos\TaxCalculator\TaxCalculator.MVC\obj\Debug\net5.0\TaxCalculator.MVC.pdb
 C:\Users\Furball\source\repos\TaxCalculator\TaxCalculator.MVC\obj\Debug\net5.0\TaxCalculator.MVC.genruntimeconfig.cache
 C:\Users\Furball\source\repos\TaxCalculator\TaxCalculator.MVC\obj\Debug\net5.0\TaxCalculator.MVC.MvcApplicationPartsAssemblyInfo.cs
+C:\Users\Furball\source\repos\TaxCalculator\TaxCalculator.MVC\obj\Debug\net5.0\Razor\Views\Calculations\Index.cshtml.g.cs
