@@ -49,7 +49,6 @@ namespace TaxCalculator.Core.Services
                     levelList = progressionType.CalculateTaxPerLevel(annualIncome);
                     break;
 
-                //TODO: Handle this result
                 default:
                     throw new Exception("Postal Code contains no tax details.");
             }
