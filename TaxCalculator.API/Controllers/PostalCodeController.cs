@@ -26,14 +26,15 @@ namespace TaxCalculator.API.Controllers
         }
 
         [Route("GetPostalCodes")]
-        public async Task<List<PostalCodeListOutputDto>> GetPostalCodes()
+        [HttpGet]
+        public async Task<List<PostalCodeListOutputDto>> GetAllPostalCodes()
         {
             var list = await _unitOfWork.PostalCodes.GetAll();
             var mapped = _mapper.Map<List<PostalCodeListOutputDto>>(list.ToList());
             return mapped;
         }
 
-        [Route("DeletePostalCode/{id}")]
+        [HttpDelete("{id}")]
         public async Task DeletePostalCode(int id)
         {
             var postalCode = await _unitOfWork.PostalCodes.Get(id);
@@ -45,7 +46,7 @@ namespace TaxCalculator.API.Controllers
             _unitOfWork.Complete();
         }
 
-        [Route("PutPostalCode")]
+        [HttpPut("{id}")]
         public async Task PutPostalCode(PostalCode postalCode)
         {
             //this step is arguable - is here for error checking
@@ -74,8 +75,8 @@ namespace TaxCalculator.API.Controllers
         }
 
         //specific for datatables
-        [Route("GetPostalCodesForDatables")]
-        public async Task<DataTablesResponseDto> GetPostalCodesForDatables()
+        [Route("GetAllForDatables")]
+        public async Task<DataTablesResponseDto> GetAllForDatables()
         {
             var list = await _unitOfWork.PostalCodes.GetAll();
             var mapped = _mapper.Map<List<PostalCodeListOutputDto>>(list.ToList());
@@ -86,7 +87,7 @@ namespace TaxCalculator.API.Controllers
             };
         }
 
-        [Route("PostPostalCode")]
+        [HttpPost]
         public async Task<bool> PostPostalCode(PostalCode postalCode)
         {
             //this bit is to set the reference id to the first availble type in db matching the Calc type

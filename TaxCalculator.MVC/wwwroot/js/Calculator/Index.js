@@ -41,7 +41,7 @@ $('#btnSubmit').on('click', function () {
 
         $.ajax({
             url: "http://localhost:5000/Calculation/DoTaxCalculation/" + income + "/" + postalCode,
-            type: "Get",
+            type: "GET",
             async: true,
             success: function (data) {
 

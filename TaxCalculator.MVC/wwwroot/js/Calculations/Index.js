@@ -1,7 +1,7 @@
 ﻿$(document).ready(function () {
     $('#calcsTable').DataTable({
         ajax: {
-            url: "http://localhost:5000/Calculation/GetCalculationsForDatables/",
+            url: "http://localhost:5000/Calculation/GetAllForDatables/",
             type: "GET"
         },
         columns: [

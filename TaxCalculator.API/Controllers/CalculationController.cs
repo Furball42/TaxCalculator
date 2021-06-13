@@ -34,8 +34,8 @@ namespace TaxCalculator.API.Controllers
         }
 
         //generic call
-        [Route("GetCalculations")]
-        public async Task<List<CalculationListOutputDto>> GetCalculations()
+        [HttpGet]
+        public async Task<List<CalculationListOutputDto>> GetAllCalculationResults()
         {
             var list = await _unitOfWork.CalculationResults.GetAll();            
             var mapped = _mapper.Map<List<CalculationListOutputDto>>(list);
@@ -43,8 +43,8 @@ namespace TaxCalculator.API.Controllers
         }
 
         //specific for datatables
-        [Route("GetCalculationsForDatables")]
-        public async Task<DataTablesResponseDto> GetCalculationsForDatables()
+        [Route("GetAllForDatables")]
+        public async Task<DataTablesResponseDto> GetAllForDatables()
         {
             var list = await _unitOfWork.CalculationResults.GetAll();
             var mapped = _mapper.Map<List<CalculationListOutputDto>>(list.ToList());

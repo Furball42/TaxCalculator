@@ -6,7 +6,7 @@ $(document).ready(function () {
 
     dataTable = $('#postalCodeTable').DataTable({
         ajax: {
-            url: "http://localhost:5000/PostalCode/GetPostalCodesForDatables",
+            url: "http://localhost:5000/PostalCode/GetAllForDatables",
             type: "GET"
         },
         columns: [
@@ -57,7 +57,7 @@ $('#btnSubmit').on('click', function () {
         postalCodeObj.Id = 0;
 
         $.ajax({
-            url: "http://localhost:5000/PostalCode/PostPostalCode",
+            url: "http://localhost:5000/PostalCode/",
             type: "POST",
             dataType: 'json',
             contentType: 'application/json',
