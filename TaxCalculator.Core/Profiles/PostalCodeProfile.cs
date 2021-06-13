@@ -8,7 +8,10 @@ namespace TaxCalculator.Core.Profiles
     {
         public PostalCodeProfile()
         {
-            CreateMap<PostalCode, PostalCodeListOutputDto>();
+            CreateMap<PostalCode, PostalCodeListOutputDto>()
+                .ForMember(dest =>
+                    dest.CalculationTypeDescription,
+                    opt => opt.MapFrom(src => src.CalculationType.ToString()));
         }
     }
 }

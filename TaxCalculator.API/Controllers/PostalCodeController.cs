@@ -34,9 +34,40 @@ namespace TaxCalculator.API.Controllers
             return mapped;
         }
 
+        [Route("GetCalculationTypes")]
+        [HttpGet]
+        public List<CalculationTypeListDto> GetCalculationTypes()
+        {
+            var list = new List<CalculationTypeListDto>();
+            var types = Enum.GetValues(typeof(CalculationTypeEnum))
+                            .Cast<CalculationTypeEnum>()
+                            .ToList();
+
+            foreach (var type in types)
+            {
+                list.Add(new CalculationTypeListDto() { Description = type.ToString(), Id = (int)type });
+            }
+
+            return list;
+        }
+
+        //specific for datatables
+        [Route("GetPostalCodesForDatables")]
+        [HttpGet]
+        public async Task<DataTablesResponseDto> GetPostalCodesForDatables()
+        {
+            var list = await _unitOfWork.PostalCodes.GetAll();
+            var mapped = _mapper.Map<List<PostalCodeListOutputDto>>(list.ToList());
+            return new DataTablesResponseDto()
+            {
+                Data = mapped.ToArray(),
+                RecordsTotal = mapped.Count,
+            };
+        }
+
         [Route("PostPostalCode")]
         [HttpPost]
-        public async Task PostPostalCode(PostalCode postalCode)
+        public async Task<bool> PostPostalCode(PostalCode postalCode)
         {
             //this bit is to set the reference id to the first availble type in db matching the Calc type
             //this will probably be removed if we move on to selecting a specific saved type from the db
@@ -48,6 +79,8 @@ namespace TaxCalculator.API.Controllers
 
             await _unitOfWork.PostalCodes.Add(postalCode);
             _unitOfWork.Complete();
+
+            return true;
         }
 
         private async Task<int> DetermineCalculationTypeAndReturnFirstIntanceId(CalculationTypeEnum type)

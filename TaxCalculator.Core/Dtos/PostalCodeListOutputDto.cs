@@ -7,6 +7,7 @@ namespace TaxCalculator.Core.Dtos
         public int Id { get; set; }
         public string Description { get; set; }
         public CalculationTypeEnum CalculationType { get; set; }
+        public string CalculationTypeDescription { get; set; }
         public int ReferenceId { get; set; }
     }
 }

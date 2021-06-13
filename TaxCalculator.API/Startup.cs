@@ -57,7 +57,10 @@ namespace TaxCalculator.API
             }));
 
             app.UseCors(
-                options => options.WithOrigins("http://localhost:60222").AllowAnyMethod()
+                options => options.WithOrigins("http://localhost:60222")
+                .AllowAnyHeader()
+                .AllowAnyMethod()
+                .AllowCredentials()
             );
 
             app.UseEndpoints(endpoints =>
