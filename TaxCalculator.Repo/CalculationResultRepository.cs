@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using TaxCalculator.Core.Models.CalculationResults;
+﻿using TaxCalculator.Core.Models.CalculationResults;
 
 namespace TaxCalculator.Repo
 {
@@ -9,7 +6,6 @@ namespace TaxCalculator.Repo
     {
         public CalculationResultRepository(TaxCalculatorDbContext context) : base(context)
         {
-            
         }
     }
 }

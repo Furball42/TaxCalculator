@@ -1,11 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
+﻿using System.Threading.Tasks;
 
 namespace TaxCalculator.Core.Models.CalculationTypes
 {
-    public interface  IFlatRateRepository : IRepository<FlatRate>
+    public interface IFlatRateRepository : IRepository<FlatRate>
     {
-        FlatRate GetFirstAvailable();
+        Task<FlatRate> GetFirstAvailable();
     }
 }

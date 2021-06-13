@@ -1,11 +1,11 @@
-﻿using Microsoft.AspNetCore.Mvc;
-using System;
+﻿using AutoMapper;
+using Microsoft.AspNetCore.Mvc;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using TaxCalculator.Core.Dtos;
 using TaxCalculator.Core.Models;
-using TaxCalculator.Core.Models.CalculationTypes;
+using TaxCalculator.Core.Models.CalculationResults;
 using TaxCalculator.Core.Services;
 
 namespace TaxCalculator.API.Controllers
@@ -14,98 +14,45 @@ namespace TaxCalculator.API.Controllers
     [Route("[controller]")]
     public class CalculationController : ControllerBase
     {
-        private readonly IUnitOfWork _unitOfWork;        
-        private readonly ICalculationService _calculationService;        
+        private readonly IUnitOfWork _unitOfWork;
+        private readonly IMapper _mapper;
+        private readonly ICalculationService _calculationService;
 
         public CalculationController(IUnitOfWork unitOfWork,
-            ICalculationService calculationService)
+            ICalculationService calculationService,
+            IMapper mapper)
         {
             _unitOfWork = unitOfWork;
+            _mapper = mapper;
             _calculationService = calculationService;
         }
 
         [Route("DoTaxCalculation/{annualIncome}/{code}")]
+        public async Task<CalculationResultDto> DoTaxCalculation(decimal annualIncome, string code)
+        {
+            return await _calculationService.ReturnDtoAndSave(annualIncome, code);
+        }
+
+        //generic call
         [HttpGet]
-        public CalculationResultDto DoTaxCalculation(decimal annualIncome, string code)
+        public async Task<List<CalculationListOutputDto>> GetAllCalculationResults()
         {
-            return _calculationService.ReturnDtoAndSave(annualIncome, code);
-
-
-            //if (code == null)
-            //    throw new Exception("Invalid postal code.");
-
-            ////get tax type
-            //var postalCode = _unitOfWork.PostalCodes.GetByCode(code);
-
-            //if(postalCode == null)
-            //    throw new Exception("Postal Code not on record.");
-
-            ////TODO: Comment over decision here and probs domain service?
-            ////OR CONVERT TO ID
-            ////TODO: Save to db after successful calc
-            //var totalTax = 0m;
-            //switch (postalCode.CalculationType) {
-
-            //    case Core.Enums.CalculationTypeEnum.FlatRate:
-
-            //        var flatRateType = _unitOfWork.FlatRates.GetFirstAvailable();
-            //        totalTax = flatRateType.CalculateResult(annualIncome);
-            //        break;
-
-            //    case Core.Enums.CalculationTypeEnum.FlatValue:
-
-            //        var flatValueType = _unitOfWork.FlatRates.GetFirstAvailable();
-            //        totalTax = flatValueType.CalculateResult(annualIncome);
-            //        break;
-
-            //    case Core.Enums.CalculationTypeEnum.Progressive:
-
-            //        var progressionType = _unitOfWork.FlatRates.GetFirstAvailable();
-            //        totalTax = progressionType.CalculateResult(annualIncome);
-            //        break;
-
-            //    //TODO: Handle this result
-            //    default:
-            //        throw new Exception("Postal Code contains no tax details.");
-            //}
-
-            ////save to DB TODO: probs move this
-            //_unitOfWork.CalculationResults.Add(new Core.Models.CalculationResults.CalculationResult()
-            //{
-            //    AnnualIncome = annualIncome,
-            //    CalculatedTax = totalTax,
-            //    DateTimeCreated = DateTime.Now,
-            //    PostalCode = postalCode.Description
-            //});
-            //_unitOfWork.Complete();
-
-            //return BuildResultDto(annualIncome, totalTax);
+            var list = await _unitOfWork.CalculationResults.GetAll();            
+            var mapped = _mapper.Map<List<CalculationListOutputDto>>(list);
+            return mapped;
         }
 
-        [Route("GetFlatRates")]
-        [HttpGet]        
-        public async Task<IEnumerable<FlatRate>> GetFlatRates()
+        //specific for datatables
+        [Route("GetAllForDatables")]
+        public async Task<DataTablesResponseDto> GetAllForDatables()
         {
-            return await _unitOfWork.FlatRates.GetAll();
+            var list = await _unitOfWork.CalculationResults.GetAll();
+            var mapped = _mapper.Map<List<CalculationListOutputDto>>(list.ToList());
+            return new DataTablesResponseDto()
+            {
+                Data = mapped.ToArray(),
+                RecordsTotal = mapped.Count,
+            };
         }
-
-        [Route("GetFlatRate/{id}")]
-        [HttpGet]
-        public async Task<FlatRate> GetFlatRateById(int id)
-        {
-            return await _unitOfWork.FlatRates.Get(id);
-        }
-
-        //private CalculationResultDto BuildResultDto(decimal originalIncome, decimal taxTotal)
-        //{
-        //    return new CalculationResultDto()
-        //    {
-        //        OriginalIncome = originalIncome,
-        //        TotalTaxes = taxTotal,
-        //        IncomeAfterTax = originalIncome - taxTotal,
-        //        TotalMonthlyTaxes = taxTotal / 12,
-        //        TotalTaxPercentage = taxTotal / originalIncome * 100,
-        //    };
-        //}
     }
 }

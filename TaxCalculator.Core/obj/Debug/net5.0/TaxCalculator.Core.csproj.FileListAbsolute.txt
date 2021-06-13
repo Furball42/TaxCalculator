@@ -1,0 +1,12 @@
+C:\Users\Furball\source\repos\TaxCalculator\TaxCalculator.Core\bin\Debug\net5.0\TaxCalculator.Core.deps.json
+C:\Users\Furball\source\repos\TaxCalculator\TaxCalculator.Core\bin\Debug\net5.0\TaxCalculator.Core.dll
+C:\Users\Furball\source\repos\TaxCalculator\TaxCalculator.Core\bin\Debug\net5.0\ref\TaxCalculator.Core.dll
+C:\Users\Furball\source\repos\TaxCalculator\TaxCalculator.Core\bin\Debug\net5.0\TaxCalculator.Core.pdb
+C:\Users\Furball\source\repos\TaxCalculator\TaxCalculator.Core\obj\Debug\net5.0\TaxCalculator.Core.csproj.AssemblyReference.cache
+C:\Users\Furball\source\repos\TaxCalculator\TaxCalculator.Core\obj\Debug\net5.0\TaxCalculator.Core.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\Furball\source\repos\TaxCalculator\TaxCalculator.Core\obj\Debug\net5.0\TaxCalculator.Core.AssemblyInfoInputs.cache
+C:\Users\Furball\source\repos\TaxCalculator\TaxCalculator.Core\obj\Debug\net5.0\TaxCalculator.Core.AssemblyInfo.cs
+C:\Users\Furball\source\repos\TaxCalculator\TaxCalculator.Core\obj\Debug\net5.0\TaxCalculator.Core.csproj.CoreCompileInputs.cache
+C:\Users\Furball\source\repos\TaxCalculator\TaxCalculator.Core\obj\Debug\net5.0\TaxCalculator.Core.dll
+C:\Users\Furball\source\repos\TaxCalculator\TaxCalculator.Core\obj\Debug\net5.0\ref\TaxCalculator.Core.dll
+C:\Users\Furball\source\repos\TaxCalculator\TaxCalculator.Core\obj\Debug\net5.0\TaxCalculator.Core.pdb

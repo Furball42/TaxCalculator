@@ -1,5 +1,7 @@
 using Microsoft.AspNetCore.Builder;
+using Microsoft.AspNetCore.Diagnostics;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -9,6 +11,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using TaxCalculator.Core.Profiles;
 using TaxCalculator.Repo;
 
 namespace TaxCalculator.API
@@ -25,6 +28,9 @@ namespace TaxCalculator.API
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddAutoMapper(typeof(CalculationProfile));
+            services.AddAutoMapper(typeof(PostalCodeProfile));
+            services.AddCors();
             services.AddControllers();
             services.AddRepository();
         }
@@ -40,6 +46,22 @@ namespace TaxCalculator.API
             app.UseRouting();
 
             app.UseAuthorization();
+
+            app.UseExceptionHandler(c => c.Run(async context =>
+            {
+                var exception = context.Features
+                    .Get<IExceptionHandlerPathFeature>()
+                    .Error;
+                var response = new { error = exception.Message };
+                await context.Response.WriteAsJsonAsync(response);
+            }));
+
+            app.UseCors(
+                options => options.WithOrigins("http://localhost:60222")
+                .AllowAnyHeader()
+                .AllowAnyMethod()
+                .AllowCredentials()
+            );
 
             app.UseEndpoints(endpoints =>
             {

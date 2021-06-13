@@ -1,6 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Text;
 using TaxCalculator.Core.Models.CalculationResults;
 using TaxCalculator.Core.Models.CalculationTypes;
 using TaxCalculator.Core.Models.PostalCodes;
@@ -11,7 +9,7 @@ namespace TaxCalculator.Core.Models
     {
         ICalculationResultRepository CalculationResults { get; }
         IPostalCodeRepository PostalCodes { get; }
-        IFlatRateRepository FlatRates { get; }  
+        IFlatRateRepository FlatRates { get; }
         IFlatValueRepository FlatValues { get; }
         IProgressiveRepository Progressives { get; }
 

@@ -1,7 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
+﻿using Microsoft.EntityFrameworkCore;
+using System.Threading.Tasks;
 using TaxCalculator.Core.Models.CalculationTypes;
 
 namespace TaxCalculator.Repo
@@ -10,12 +8,11 @@ namespace TaxCalculator.Repo
     {
         public FlatRateRepository(TaxCalculatorDbContext context) : base(context)
         {
-            
         }
 
-        public FlatRate GetFirstAvailable()
+        public async Task<FlatRate> GetFirstAvailable()
         {
-            return _context.FlatRates.FirstOrDefault();
+            return await _context.FlatRates.FirstOrDefaultAsync();
         }
     }
 }

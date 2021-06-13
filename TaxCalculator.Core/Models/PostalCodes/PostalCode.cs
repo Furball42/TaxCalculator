@@ -1,9 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
-using System.Text;
+﻿using System.ComponentModel.DataAnnotations;
 using TaxCalculator.Core.Enums;
-using TaxCalculator.Core.Models.CalculationTypes;
 
 namespace TaxCalculator.Core.Models.PostalCodes
 {
@@ -19,6 +15,6 @@ namespace TaxCalculator.Core.Models.PostalCodes
 
         //the reasoning behind this: opens up extensibility when wanting to add more than one
         //of a certain type: ie. FLatRate10, FlatRate17
-        public int ReferenceId { get; set; } 
+        public int ReferenceId { get; set; }
     }
 }

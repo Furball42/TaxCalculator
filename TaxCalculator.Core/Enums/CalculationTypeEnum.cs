@@ -1,13 +1,16 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
+﻿using System.ComponentModel.DataAnnotations;
 
 namespace TaxCalculator.Core.Enums
 {
     public enum CalculationTypeEnum
     {
-        FlatValue,
-        FlatRate,
-        Progressive,
+        [Display(Name = "Flat Value")]
+        FlatValue = 0,
+
+        [Display(Name = "Flat Rate")]
+        FlatRate = 1,
+
+        [Display(Name = "Progressive")]
+        Progressive = 2,
     }
 }
