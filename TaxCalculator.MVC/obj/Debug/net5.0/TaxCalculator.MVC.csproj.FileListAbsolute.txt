@@ -81,3 +81,5 @@ C:\Users\Furball\source\repos\TaxCalculator\TaxCalculator.MVC\obj\Debug\net5.0\T
 C:\Users\Furball\source\repos\TaxCalculator\TaxCalculator.MVC\obj\Debug\net5.0\TaxCalculator.MVC.genruntimeconfig.cache
 C:\Users\Furball\source\repos\TaxCalculator\TaxCalculator.MVC\obj\Debug\net5.0\TaxCalculator.MVC.MvcApplicationPartsAssemblyInfo.cs
 C:\Users\Furball\source\repos\TaxCalculator\TaxCalculator.MVC\obj\Debug\net5.0\Razor\Views\Calculations\Index.cshtml.g.cs
+C:\Users\Furball\source\repos\TaxCalculator\TaxCalculator.MVC\bin\Debug\net5.0\AutoMapper.dll
+C:\Users\Furball\source\repos\TaxCalculator\TaxCalculator.MVC\bin\Debug\net5.0\AutoMapper.Extensions.Microsoft.DependencyInjection.dll

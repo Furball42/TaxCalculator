@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using AutoMapper;
+using Microsoft.AspNetCore.Mvc;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -14,12 +15,15 @@ namespace TaxCalculator.API.Controllers
     public class CalculationController : ControllerBase
     {
         private readonly IUnitOfWork _unitOfWork;
+        private readonly IMapper _mapper;
         private readonly ICalculationService _calculationService;
 
         public CalculationController(IUnitOfWork unitOfWork,
-            ICalculationService calculationService)
+            ICalculationService calculationService,
+            IMapper mapper)
         {
             _unitOfWork = unitOfWork;
+            _mapper = mapper;
             _calculationService = calculationService;
         }
 
@@ -33,10 +37,11 @@ namespace TaxCalculator.API.Controllers
         //generic call
         [Route("GetCalculations")]
         [HttpGet]
-        public async Task<List<CalculationResult>> GetCalculations()
+        public async Task<List<CalculationListOutputDto>> GetCalculations()
         {
-            var list = await _unitOfWork.CalculationResults.GetAll();
-            return list.ToList();
+            var list = await _unitOfWork.CalculationResults.GetAll();            
+            var mapped = _mapper.Map<List<CalculationListOutputDto>>(list);
+            return mapped;
         }
 
         //specific for datatables
@@ -44,13 +49,12 @@ namespace TaxCalculator.API.Controllers
         [HttpGet]
         public async Task<DataTablesResponseDto> GetCalculationsForDatables()
         {
-            var result = await _unitOfWork.CalculationResults.GetAll();
-            var list = result.ToList();
-
+            var list = await _unitOfWork.CalculationResults.GetAll();
+            var mapped = _mapper.Map<List<CalculationListOutputDto>>(list.ToList());
             return new DataTablesResponseDto()
             {
-                Data = list.ToArray(),
-                RecordsTotal = list.Count,
+                Data = mapped.ToArray(),
+                RecordsTotal = mapped.Count,
             };
         }
     }

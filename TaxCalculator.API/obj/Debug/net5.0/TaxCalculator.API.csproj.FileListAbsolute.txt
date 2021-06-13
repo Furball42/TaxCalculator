@@ -58,3 +58,5 @@ C:\Users\Furball\source\repos\TaxCalculator\TaxCalculator.API\obj\Debug\net5.0\T
 C:\Users\Furball\source\repos\TaxCalculator\TaxCalculator.API\obj\Debug\net5.0\ref\TaxCalculator.API.dll
 C:\Users\Furball\source\repos\TaxCalculator\TaxCalculator.API\obj\Debug\net5.0\TaxCalculator.API.pdb
 C:\Users\Furball\source\repos\TaxCalculator\TaxCalculator.API\obj\Debug\net5.0\TaxCalculator.API.genruntimeconfig.cache
+C:\Users\Furball\source\repos\TaxCalculator\TaxCalculator.API\bin\Debug\net5.0\AutoMapper.dll
+C:\Users\Furball\source\repos\TaxCalculator\TaxCalculator.API\bin\Debug\net5.0\AutoMapper.Extensions.Microsoft.DependencyInjection.dll

@@ -11,6 +11,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using TaxCalculator.Core.Profiles;
 using TaxCalculator.Repo;
 
 namespace TaxCalculator.API
@@ -27,8 +28,9 @@ namespace TaxCalculator.API
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddAutoMapper(typeof(CalculationProfile));
+            services.AddAutoMapper(typeof(PostalCodeProfile));
             services.AddCors();
-
             services.AddControllers();
             services.AddRepository();
         }

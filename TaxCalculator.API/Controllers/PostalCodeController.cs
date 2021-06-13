@@ -1,8 +1,10 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using AutoMapper;
+using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using TaxCalculator.Core.Dtos;
 using TaxCalculator.Core.Enums;
 using TaxCalculator.Core.Models;
 using TaxCalculator.Core.Models.PostalCodes;
@@ -14,18 +16,22 @@ namespace TaxCalculator.API.Controllers
     public class PostalCodeController : ControllerBase
     {
         private readonly IUnitOfWork _unitOfWork;
+        private readonly IMapper _mapper;
 
-        public PostalCodeController(IUnitOfWork unitOfWork)
+        public PostalCodeController(IUnitOfWork unitOfWork,
+            IMapper mapper)
         {
             _unitOfWork = unitOfWork;
+            _mapper = mapper;
         }
 
         [Route("GetPostalCodes")]
         [HttpGet]
-        public async Task<List<PostalCode>> GetPostalCodes()
+        public async Task<List<PostalCodeListOutputDto>> GetPostalCodes()
         {
             var list = await _unitOfWork.PostalCodes.GetAll();
-            return list.ToList();
+            var mapped = _mapper.Map<List<PostalCodeListOutputDto>>(list.ToList());
+            return mapped;
         }
 
         [Route("PostPostalCode")]
