@@ -42,6 +42,14 @@ The solution has been set with multiple startup projects - the API and the MVC. 
 
 A zip file was added with the **localDB** database as requested. Note that this localdb is the working database I used and as such contains testing info etc.
 
+## Further Development
+The next steps in this project, would it have been for production, would have been the following:
+- Flesh out the various tax types along with the CRUDs associated with it.
+- Implement some security to hide all the CRUDs and setup behind authorization and in a Administrator section.
+- Implement a more eye-catching theme than the base Bootstrap one.
+- Probably some sort of matrix dashboard.
+- To be fancy, write a mobile client for the calculations.
+
 ## GitHub
 There are a few branches on GitHub, but `main` should be the final version.
 
