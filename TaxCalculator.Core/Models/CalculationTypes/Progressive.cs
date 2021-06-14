@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using TaxCalculator.Core.Dtos;
+using TaxCalculator.Core.Helpers;
 
 namespace TaxCalculator.Core.Models.CalculationTypes
 {
@@ -29,8 +30,10 @@ namespace TaxCalculator.Core.Models.CalculationTypes
                         if (level.Max == -1)
                             level.Max = annualIncome; //flag for infinite above upper level
 
-                        var taxableThisRate = Math.Min(level.Max - level.Min, annualIncome - level.Min);
-                        var taxOnThisLevel = taxableThisRate / 100 * level.Rate;
+                        var previousMax = (level.Min - 1) < 0 ? 0 : level.Min - 1;
+
+                        var taxableThisRate = Math.Min(level.Max - previousMax, annualIncome - previousMax);
+                        var taxOnThisLevel = CalculationsHelper.CalculatePercentageOf(taxableThisRate, level.Rate);
                         totalTax += taxOnThisLevel;
                     }
                 }
@@ -56,8 +59,10 @@ namespace TaxCalculator.Core.Models.CalculationTypes
                     if (level.Max == -1)
                         level.Max = annualIncome; //flag for infinite above upper level
 
-                    var taxableThisRate = Math.Min(level.Max - level.Min, annualIncome - level.Min);
-                    var taxOnThisLevel = taxableThisRate / 100 * level.Rate;
+                    var previousMax = (level.Min - 1) < 0 ? 0 : level.Min - 1;
+
+                    var taxableThisRate = Math.Min(level.Max - previousMax, annualIncome - previousMax);
+                    var taxOnThisLevel = CalculationsHelper.CalculatePercentageOf(taxableThisRate, level.Rate);
 
                     returnList.Add(new ProgressiveTaxByLevelDto()
                     {

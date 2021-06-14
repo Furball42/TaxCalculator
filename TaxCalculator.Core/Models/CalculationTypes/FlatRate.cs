@@ -1,6 +1,7 @@
 ﻿using System;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using TaxCalculator.Core.Helpers;
 
 namespace TaxCalculator.Core.Models.CalculationTypes
 {
@@ -13,7 +14,7 @@ namespace TaxCalculator.Core.Models.CalculationTypes
         public override decimal CalculateResult(decimal annualIncome)
         {
             if (annualIncome > 0)
-                return annualIncome / 100 * Rate;
+                return CalculationsHelper.CalculatePercentageOf(annualIncome, Rate);
             else
                 throw new ArgumentException("No negative income value allowed.");
         }
