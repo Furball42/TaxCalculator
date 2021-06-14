@@ -43,7 +43,7 @@ The solution has been set with multiple startup projects - the API and the MVC. 
 A zip file was added with the **localDB** database as requested. Note that this localdb is the working database I used and as such contains testing info etc.
 
 ## GitHub
-There are a few branches on GitHub, but `main` should be the final version. `dev` was used during development and `main-final` was used as prepatory placeholder.
+There are a few branches on GitHub, but `main` should be the final version.
 
 ## Postman Export
 
