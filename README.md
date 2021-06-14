@@ -22,6 +22,7 @@ This project made use of the following:
 - Moq
 - SQL LocalDB
 - Postman
+- GitHub
 
 ## Removed Projects and Classes
 Note that there was a project *removed* after the initial upload to GitHub. This project is just **TaxCalculator**. This can be excluded or removed as see fit. All other excluded classes can just be ignored.
@@ -41,6 +42,9 @@ A few key notes on starting up the project:
 Secondly, in the need to sidestep CORS failures, change the allowable URL in the **Configure** method in the *Startup.cs* of the API.
 
 A zip file was added with the **localDB** database as requested. Note that this localdb is the working database I used and as such contains testing info etc.
+
+## GitHub
+There are a few branches on GitHub, but `main` should be the final version. `dev` was used during development and `main-final` was used as prepatory placeholder.
 
 ## Postman Export
 
