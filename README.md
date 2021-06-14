@@ -28,7 +28,7 @@ Note that there was a project *removed* after the initial upload to GitHub. This
 
 ## Solution Structure
 The solution consists of the following projects:
-- **TaxCalculator.API** : this is the API set up to handle the incoming calls
+- **TaxCalculator.API** : this is the API set up to handle the incoming calls. This contains the calls to the calculation engine, as well as the Postal Code CRUDs.
 - **TaxCalculator.MVC** : this is a basic MVC front-end that uses JQuery to make calls to the API.
 - **TaxCalculator.Core** : this contains most of the Models and business logic, as well as DTOs and Helper classes.
 - **TaxCalculator.Repo** : this is the project that handles the repository work to and from the DB, wrapped in a Unit of Work.
