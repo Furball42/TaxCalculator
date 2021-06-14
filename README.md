@@ -7,7 +7,7 @@ The project structure, especially the database, is designed towards having multi
 Furthermore, as security wasn't a prerequisite for the assessment, user creation and API security wasn't implemented. 
 
 Lastly, a custom Repository management wrapper was written to handle calls to the database. This goes along with a custom Unit of Work that handles the actual calls and disposes
-if needed.
+as needed.
 
 ## Tools Used
 This project made use of the following:
