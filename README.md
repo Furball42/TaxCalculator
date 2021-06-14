@@ -38,6 +38,8 @@ A few key notes on starting up the project:
 - There are two changes that will have to be made to get it working propertly. Firstly, change the connection string found in *DependencyInjection.cs* on the **Repo** layer.
 Secondly, in the need to sidestep CORS failures, change the allowable URL in the **Configure** method in the *Startup.cs* of the API.
 
+The solution has been set with multiple startup projects - the API and the MVC. Since the API is locally hosted, it is launched together with the MVC.
+
 A zip file was added with the **localDB** database as requested. Note that this localdb is the working database I used and as such contains testing info etc.
 
 ## GitHub
