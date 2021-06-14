@@ -1,6 +1,7 @@
 ﻿using System;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using TaxCalculator.Core.Helpers;
 
 namespace TaxCalculator.Core.Models.CalculationTypes
 {
@@ -23,7 +24,7 @@ namespace TaxCalculator.Core.Models.CalculationTypes
                 if (annualIncome > ValueThreshold)
                     return Value;
                 else
-                    return annualIncome / 100 * Percentage;
+                    return CalculationsHelper.CalculatePercentageOf(annualIncome, Percentage);
             }
             else
                 throw new ArgumentException("No negative income value allowed.");

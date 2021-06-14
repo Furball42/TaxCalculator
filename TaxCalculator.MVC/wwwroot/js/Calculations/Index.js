@@ -20,8 +20,9 @@
         ordering: false,
         paging: true,
         searching: false,
+        lengthChange: false,
         language: {
-            "decimal": ".",
+            "decimal": ",",
             "thousands": " "
         }
     });

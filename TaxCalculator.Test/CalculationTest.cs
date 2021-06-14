@@ -120,7 +120,7 @@ namespace TaxCalculator.Test
             var result = progressive.CalculateResult(150000);
 
             Assert.IsNotNull(result);
-            Assert.AreEqual(35719.320, result);
+            Assert.AreEqual(35720, result);
         }
 
         private string BuildProgressiveData()
