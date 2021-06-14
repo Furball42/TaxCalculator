@@ -24,7 +24,7 @@ This project made use of the following:
 - Postman
 
 ## Removed Projects and Classes
-Note that there were a project *removed* after the initial upload to GitHub. This project is just **TaxCalculator**. This can be excluded or removed as see fit. All other excluded classes can just be ignored.
+Note that there was a project *removed* after the initial upload to GitHub. This project is just **TaxCalculator**. This can be excluded or removed as see fit. All other excluded classes can just be ignored.
 
 ## Solution Structure
 The solution consists of the following projects:
