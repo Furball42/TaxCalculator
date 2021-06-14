@@ -1,11 +1,8 @@
 # TaxCalculator
 ## Overview
-This project contains a Tax Calculator as put forth in the assessment brief. It handles the three different types of tax calculation based on the postal code given as well as the
-annual income.
+This project contains a Tax Calculator as put forth in the assessment brief. It handles the three different types of tax calculation based on the postal code given as well as the annual income.
 
-The project structure, especially the database, leans toward having multiple types per calculation type. i.e one can have multiple Flat Value or Flat Rates etc.
-The foundations has been added to the project, but not stricly implemented, but left as possible expansion options. Note that what has been added is the ability to create
-more Postal Codes and link this up to a tax type. 
+The project structure, especially the database, is designed towards having multiple entries per tax/calculation type i.e one can have multiple Flat Value or Flat Rates entries. etc. The foundations has been added to the project, but not stricly implemented, yet left for possible expansion options. Note that what has well been added is the ability to create more **Postal Codes** and link this up to a tax type. 
 
 Furthermore, as security wasn't a prerequisite for the assessment, user creation and API security wasn't implemented. 
 
