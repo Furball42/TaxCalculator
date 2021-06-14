@@ -17,7 +17,8 @@ $(document).ready(function () {
         serverSide: false,
         ordering: false,
         paging: true,
-        searching: false,
+        searching: true,
+        lengthChange: false,
     });
 
     $.ajax({
